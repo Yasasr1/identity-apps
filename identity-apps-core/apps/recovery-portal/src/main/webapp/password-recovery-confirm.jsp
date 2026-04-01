@@ -58,6 +58,14 @@
         return;
     }
 
+    String isSharedUser = request.getParameter("isSharedUser");
+    if (Boolean.parseBoolean(isSharedUser)) {
+        request.setAttribute("error", true);
+        request.setAttribute("errorMsg", IdentityManagementEndpointUtil.i18n(recoveryResourceBundle, "Password.Expired"));
+        request.getRequestDispatcher("error.jsp").forward(request, response);
+        return;
+    }
+
     String errorKey = request.getParameterMap().containsKey("errorKey") 
     	? request.getParameter("errorKey") 
     	: StringUtils.EMPTY;
